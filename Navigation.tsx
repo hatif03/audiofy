@@ -3,7 +3,13 @@ import AudioTrim from "./screens/AudioTrim";
 import VideoConvert from "./screens/VideoConvert";
 import VideoSelect from "./screens/VideoSelect";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+    VideoSelect: undefined;
+    VideoConvert: {selectedImg: string};
+    AudioTrim: undefined;
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
     return(

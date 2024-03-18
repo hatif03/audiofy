@@ -3,13 +3,15 @@ import React, {useState} from 'react'
 import AppButton from '../components/AppButton'
 import { Ionicons } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
+import { RootStackParamList } from '../Navigation'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList, 'VideoSelect'>
 
 const VideoSelect = (props: Props) => {
 
-  const navigate = useNavigation()
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>()
 
   const [image, setImage] = useState(null);
 
@@ -26,7 +28,7 @@ const VideoSelect = (props: Props) => {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      navigate.navigate('VideoConvert', {selectedImg: image})
+      navigate.navigate('VideoConvert', {selectedImg: image? image: ""})
     } else{
       console.log("cancelled")
     }
